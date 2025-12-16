@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container{
+  margin-top: 50px;
+}
+.row {
+  margin: 0px auto;
+  width: 960px;
+}
+p{
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+}
+</style>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+       <div class="col-md-3">
+	    <div class="thumbnail">
+	      <a href="#">
+	        <img src="" style="width:240px;height: 130px">
+	        <div class="caption">
+	          <p>((address))</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
+    </div>
+  </div>
+  <script>
+    const foodApp=Vue.createApp({
+    	data(){
+    		return{
+    			address:'마포',
+    			food_list:[],
+    			curpage:1,
+    			totalpage:0,
+    			startPage:0,
+    			endPage:0
+    		}
+    	},
+    	mounted(){
+    		this.dataRecv()
+    	},
+    	methods:{
+    		async dataRecv(){
+			await axios.get('http://localhost/food/find_vue/',{
+    			params:{
+    				page:this.curpage,
+    				address:this.address
+    			}
+    		}).then(response=>{
+    			console.log(response.data)
+    		})
+    		}
+    	}
+    })
+    foodApp.config.compilerOptions.delimiters=['((','))']
+    foodApp.mount(".container")
+  </script>  
+</body>
+</html>

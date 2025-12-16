@@ -1,0 +1,115 @@
+package com.sist.web.service;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sist.web.mapper.*;
+import com.sist.web.vo.*;
+@Service
+public class BoardServiceImpl implements BoardService{
+	@Autowired
+	private BoardMapper mapper;
+
+	@Override
+	public List<BoardVO> boardListData(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.boardListData(map);
+	}
+
+	@Override
+	public int boardRowCount() {
+		// TODO Auto-generated method stub
+		return mapper.boardRowCount();
+	}
+
+	@Override
+	public void boardInsert(BoardVO vo) {
+		// TODO Auto-generated method stub
+		mapper.boardInsert(vo);
+	}
+
+	@Override
+	public BoardVO boardDetailData(int no) {
+		// TODO Auto-generated method stub
+		mapper.boardHitIncrement(no);
+		return mapper.boardDetailData(no);
+	}
+
+	@Override
+	public BoardVO boardUpdateData(int no) {
+		// TODO Auto-generated method stub
+		return mapper.boardDetailData(no);
+	}
+
+	@Override
+	public boolean boardUpdate(BoardVO vo) {
+		// TODO Auto-generated method stub
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			bCheck=true;
+			mapper.boardUpdate(vo);
+		}
+		return bCheck;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void boardReplyInsert(int pno,BoardVO vo) {
+		// TODO Auto-generated method stub
+		// 1. 부모 정보 읽기
+	    BoardVO pvo = mapper.boardParentInfoData(pno);
+
+	    // 2. 부모보다 step 증가
+	    mapper.boardGroupStepIncrement(pvo);
+
+	    // 3. 자식 글의 group 정보 설정
+	    vo.setGroup_id(pvo.getGroup_id());
+	    vo.setGroup_step(pvo.getGroup_step() + 1);
+	    vo.setGroup_tab(pvo.getGroup_tab() + 1);
+
+	    // 4. root 설정
+	    vo.setRoot(pno);
+
+	    // 5. 자식 글 insert 
+	    mapper.boardReplyInsert(vo);
+
+	    // 6. 부모글 depth 증가
+	    mapper.boardDepthIncrement(pno);
+	}
+
+	@Override
+	public void boardReplyInsert(BoardVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean boardDelete(int no, String pwd) {
+		// TODO Auto-generated method stub
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(no);
+		if(db_pwd.equals(pwd))
+		{
+			bCheck=true;
+			BoardVO vo=mapper.boardDeleteInfoData(no);
+			if(vo.getDepth()==0)
+			{
+				mapper.boardDelete(no);
+			}
+			else
+			{
+				mapper.boardSubjectChange(no);
+			}
+			mapper.boardDepthDecrement(vo.getRoot());
+		}
+		return bCheck;
+	}
+	
+	// 답변 => 트랜잭션 적용(일괄처리) => DML / TCL
+	
+	
+}

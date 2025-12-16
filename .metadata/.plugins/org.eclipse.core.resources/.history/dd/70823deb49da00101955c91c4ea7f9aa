@@ -1,0 +1,32 @@
+package com.sist.web.aop;
+import java.util.*;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.sist.web.service.*;
+import com.sist.web.vo.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+@Aspect	//공통 모듈 => 모든 HTML에 공통으로 적용
+@Component // 관리 => 스프링에서 처리
+@RequiredArgsConstructor
+/*
+ * 		AOP 적용 => JoinPoint / PointCut 어떤 메소드인지
+ * 					메소드 어느 영역인지
+ * */
+public class FooterAOP {
+	//FoodController => fService 동일하다(싱글턴으로 저장)
+	private final FoodService fService;
+	
+	@After("execution(* com.sist.web.controller.*Controller.*(..)")
+	public void after()
+	{
+		HttpServletRequest request=((ServletRequestAttributes)RequestContextHolder.getRequest());
+		List<FoodVO> fList=
+	}
+	
+}

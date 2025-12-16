@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.row{
+	margin: 0px auto;
+	width:960px
+}
+p{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+     <form method="post" action="/food/find">
+      <select name="column" class="input-sm">
+      	<option value="all">전체</option>
+        <option value="address">주소</option>
+        <option value="name">맛집명</option>
+        <option value="type">음식종류</option>
+      </select>
+      <input type=text name=ss size=20 class="input-sm">
+      <button type=submit class="btn-sm btn-primary">검색</button>
+     </form>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row text-center" style="margin-top:20px">
+    </div>
+  </div>
+</body>
+</html>

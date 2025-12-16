@@ -1,0 +1,10 @@
+package com.sist.web.service;
+
+import org.springframework.stereotype.Service;
+import java.util.*;
+import com.sist.web.vo.*;
+import com.sist.web.mapper.*;
+@Service
+public class SeoulServiceImpl {
+	private SeoulMapper mapper;
+}

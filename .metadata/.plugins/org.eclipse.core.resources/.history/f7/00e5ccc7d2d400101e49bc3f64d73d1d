@@ -1,0 +1,29 @@
+package com.sist.web.conf;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.sist.web.intercepter.BoardInterceptor;
+/*
+ * 		1. DI => @Autowired : 주소값 주입
+ * 		2. AOP => 로그 / 공통으로 보내는 값
+ * 		3. MVC의 구조
+ * 		4. ORM : MyBatis / JPA(React)
+ * 							| MySQL => csv
+ * 								| 데이터형 / 내장 함수
+ * 		5. Transaction
+ * 		------------------------------------------- 필수
+ * 		6. InterCepter
+ * 		7. 공통 예외처리
+ * 		------------------------------ 선택
+ * */
+@Configuration
+public class BoardConfig implements WebMvcConfigurer{
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new BoardInterceptor()).addPathPatterns("/board/**").excludePathPatterns("/board/*_ok");
+	}
+	
+}

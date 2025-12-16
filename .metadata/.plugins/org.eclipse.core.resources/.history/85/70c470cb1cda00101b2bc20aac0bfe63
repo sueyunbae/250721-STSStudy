@@ -1,0 +1,8 @@
+package com.sist.web.entity;
+import java.util.*;
+
+import jakarta.persistence.Entity;
+@Entity(name="board")
+public class BoardEntity {
+	private int no;
+}

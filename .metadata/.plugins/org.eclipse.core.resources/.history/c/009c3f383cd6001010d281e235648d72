@@ -1,0 +1,34 @@
+package com.sist.web.controller;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+import com.sist.web.service.*;
+import com.sist.web.vo.*;
+
+import lombok.RequiredArgsConstructor;
+@RestController
+@RequiredArgsConstructor
+public class MainRestController {
+	private final FoodService fService;
+	
+	@GetMapping("/main_vue/")
+	public Map main_vue(@RequestParam(name="page",required = false) int page)
+	{
+		int start=(page-1)*12;
+		List<FoodVO> list=fService.foodListData(start);
+		int totalpage=fService.foodTotalPage();
+		
+		final int BLOCK=10;
+		int startPage=((page-1)/BLOCK*BLOCK)+1;
+		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+		
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		Map map=new HashMap();
+		return map;
+	}
+}

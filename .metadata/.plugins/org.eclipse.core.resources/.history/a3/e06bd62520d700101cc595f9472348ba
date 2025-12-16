@@ -1,0 +1,28 @@
+package com.sist.web.controller;
+import java.util.*;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sist.web.service.*;
+import com.sist.web.vo.*;
+
+import lombok.RequiredArgsConstructor;
+@RestController
+@RequiredArgsConstructor
+/*
+ * 		@RequiredArgsConstructor
+ * 		class A
+ * 		{
+ * 			@Autowired
+ * 			private B b;
+ *  			
+ * 			@Autowired
+ * 			public A(B b)
+ * 			{ 
+ * 			}
+ * 		}
+ * */
+public class BoardRestController {
+	private final BoardService bService;
+	
+}

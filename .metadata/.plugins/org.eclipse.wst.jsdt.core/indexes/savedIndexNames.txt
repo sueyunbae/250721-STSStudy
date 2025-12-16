@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\bootDev\bootStudy\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2630408865.index
+95551962.index
+54302411.index
+1779186717.index
+3651283450.index
+603681390.index

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/assets/css/card.css}">
+</head>
+<body>
+	<div id="main-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4" th:each="vo:${list}">
+				    <div class="thumbnail">
+				      <a href="#">
+				        <img th:src="${vo.poster}" 
+				         style="width:240px;height: 130px">
+				        <div class="caption">
+				          <p>[[${vo.name}]]</p>
+				        </div>
+				      </a>
+				    </div>
+				  </div>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

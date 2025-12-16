@@ -1,0 +1,19 @@
+package com.sist.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+import com.sist.web.service.*;
+import com.sist.web.vo.*;
+
+import lombok.NoArgsConstructor;
+@RestController
+@NoArgsConstructor
+public class BoardRestController {
+	private BoardService bService;
+	@Autowired
+	public BoardRestController(BoardService bService)
+	{
+		this.bService=bService;
+	}
+}

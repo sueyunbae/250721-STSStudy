@@ -1,0 +1,13 @@
+package com.sist.web.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+import com.sist.web.service.*;
+import com.sist.web.vo.*;
+
+import lombok.RequiredArgsConstructor;
+@RestController
+@RequiredArgsConstructor
+public class MainRestController {
+	private final FoodService fService;
+}

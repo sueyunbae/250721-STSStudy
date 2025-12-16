@@ -1,0 +1,15 @@
+package com.sist.web.service;
+import java.util.*;
+
+import org.springframework.stereotype.Service;
+
+import com.sist.web.vo.*;
+
+import lombok.RequiredArgsConstructor;
+
+import com.sist.web.mapper.*;
+@Service
+@RequiredArgsConstructor
+public class BoardServiceImpl {
+	private final BoardMapper mapper;
+}

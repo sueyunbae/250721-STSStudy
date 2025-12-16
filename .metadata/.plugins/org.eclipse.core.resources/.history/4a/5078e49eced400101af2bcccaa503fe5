@@ -1,0 +1,5 @@
+package com.sist.web.intercepter;
+
+public class BoardInterceptor {
+
+}
